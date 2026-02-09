@@ -59,8 +59,8 @@ function ParticleCanvas() {
 
             const shift = Math.sin(time * 0.0005) * 0.5 + 0.5
             gradient.addColorStop(0, `rgba(0, 212, 255, ${0.03 + shift * 0.02})`)
-            gradient.addColorStop(0.3, `rgba(123, 44, 191, ${0.02 + shift * 0.01})`)
-            gradient.addColorStop(0.6, `rgba(177, 74, 237, ${0.02})`)
+            gradient.addColorStop(0.3, `rgba(0, 150, 199, ${0.02 + shift * 0.01})`)
+            gradient.addColorStop(0.6, `rgba(0, 119, 182, ${0.02})`)
             gradient.addColorStop(1, 'transparent')
 
             ctx.fillStyle = gradient
@@ -74,7 +74,7 @@ function ParticleCanvas() {
                 canvas.width * 0.7, canvas.height * 0.6, canvas.width * 0.6
             )
             gradient2.addColorStop(0, `rgba(0, 180, 255, ${0.04})`)
-            gradient2.addColorStop(0.5, `rgba(100, 0, 200, ${0.02})`)
+            gradient2.addColorStop(0.5, `rgba(0, 150, 180, ${0.02})`)
             gradient2.addColorStop(1, 'transparent')
 
             ctx.fillStyle = gradient2

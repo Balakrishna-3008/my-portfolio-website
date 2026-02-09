@@ -1084,7 +1084,8 @@
         position: static !important;
         transform: none !important;
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
+        margin-bottom: 0.5rem;
     }
 
     .node-core {
@@ -1092,7 +1093,16 @@
         flex-direction: row;
         justify-content: flex-start;
         gap: 1rem;
-        padding: 1rem 1.5rem;
+        padding: 1rem 1.25rem;
+        border-radius: 12px 12px 0 0;
+    }
+
+    .node-icon {
+        font-size: 1.5rem;
+    }
+
+    .node-label {
+        font-size: 1rem;
     }
 
     .constellation-lines {
@@ -1101,30 +1111,36 @@
 
     .skill-details {
         position: static;
-        display: block;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
         margin-top: 0;
-        padding: 0.75rem 1rem;
-        background: rgba(0, 212, 255, 0.05);
+        padding: 1rem;
+        background: rgba(0, 212, 255, 0.03);
         border-radius: 0 0 12px 12px;
-        border-top: 1px solid var(--glass-border);
+        border-top: 1px solid rgba(0, 212, 255, 0.1);
         max-height: none;
         overflow: visible;
+        min-width: auto;
     }
 
     .skill-details ul {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
+        padding: 0;
+        margin: 0;
     }
 
     .skill-details li {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-        background: rgba(0, 212, 255, 0.1);
-        border-radius: 4px;
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+        background: rgba(0, 212, 255, 0.12);
+        border-radius: 20px;
+        color: var(--accent-cyan);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        white-space: nowrap;
     }
 
     .skill-details li::before {
