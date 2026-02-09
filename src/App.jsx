@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import ParticleCanvas from './components/ParticleCanvas'
 import FloatingNav from './components/FloatingNav'
 import FloatingLogo from './components/FloatingLogo'
@@ -15,6 +15,7 @@ import profilePhoto from './assets/profile-photo.jpg'
 import hbLogo from './assets/hb-logo.png'
 
 function App() {
+    const [activeSection, setActiveSection] = useState('hero')
     const containerRef = useRef(null)
 
     const sections = ['hero', 'about', 'skills', 'journey', 'projects', 'connect']
@@ -26,7 +27,7 @@ function App() {
         }
     }
 
-    // Update active section based on scroll
+    // Update active section based on scroll position
     useEffect(() => {
         const handleScroll = () => {
             const scrollPosition = window.scrollY + window.innerHeight / 3
@@ -36,23 +37,28 @@ function App() {
                 if (element) {
                     const { offsetTop, offsetHeight } = element
                     if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        // Update nav indicator if needed
+                        if (activeSection !== section) {
+                            setActiveSection(section)
+                        }
                         break
                     }
                 }
             }
         }
 
+        // Set initial active section
+        handleScroll()
+
         window.addEventListener('scroll', handleScroll, { passive: true })
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    }, [activeSection])
 
     return (
         <div className="app" ref={containerRef}>
             <ParticleCanvas />
             <FloatingLogo logo={hbLogo} />
             <FloatingNav
-                activeSection={'hero'}
+                activeSection={activeSection}
                 onNavigate={navigateToSection}
                 sections={sections}
             />
