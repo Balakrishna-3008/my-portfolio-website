@@ -27,31 +27,33 @@ function App() {
         }
     }
 
-    // Update active section based on scroll position
+    // Update active section based on scroll position using Intersection Observer
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollPosition = window.scrollY + window.innerHeight / 3
-
-            for (const section of sections) {
-                const element = document.getElementById(section)
-                if (element) {
-                    const { offsetTop, offsetHeight } = element
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        if (activeSection !== section) {
-                            setActiveSection(section)
-                        }
-                        break
-                    }
-                }
-            }
+        const observerOptions = {
+            root: null,
+            rootMargin: '-30% 0px -60% 0px',
+            threshold: 0
         }
 
-        // Set initial active section
-        handleScroll()
+        const observerCallback = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id)
+                }
+            })
+        }
 
-        window.addEventListener('scroll', handleScroll, { passive: true })
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [activeSection])
+        const observer = new IntersectionObserver(observerCallback, observerOptions)
+
+        sections.forEach((sectionId) => {
+            const element = document.getElementById(sectionId)
+            if (element) {
+                observer.observe(element)
+            }
+        })
+
+        return () => observer.disconnect()
+    }, [])
 
     return (
         <div className="app" ref={containerRef}>
