@@ -1058,7 +1058,7 @@
     }
 
     .scroll-indicator {
-        bottom: 2rem;
+        display: none;
     }
 
     .about-layout {
