@@ -114,6 +114,11 @@
 /* ===============================
    Hero Scene
    =============================== */
+#hero {
+    min-height: 100vh;
+    padding: 2rem;
+}
+
 .hero-scene {
     display: grid;
     grid-template-columns: 1fr 1fr;
