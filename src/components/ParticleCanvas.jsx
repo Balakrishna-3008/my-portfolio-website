@@ -42,7 +42,7 @@ function ParticleCanvas() {
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
                     radius: Math.random() * 150 + 100,
-                    hue: i % 2 === 0 ? 190 : 280, // Cyan or Magenta
+                    hue: i % 2 === 0 ? 190 : 195, // Cyan or Teal
                     speedX: (Math.random() - 0.5) * 0.3,
                     speedY: (Math.random() - 0.5) * 0.3,
                     phase: Math.random() * Math.PI * 2

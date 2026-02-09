@@ -632,7 +632,7 @@
     top: 0;
     bottom: 0;
     width: 3px;
-    background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-magenta), transparent);
+    background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-teal), transparent);
     border-radius: 3px;
 }
 
@@ -642,7 +642,7 @@
     left: -10px;
     width: 23px;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 212, 255, 0.3), rgba(177, 74, 237, 0.2), transparent);
+    background: linear-gradient(to bottom, rgba(0, 212, 255, 0.3), rgba(0, 180, 216, 0.2), transparent);
     filter: blur(10px);
 }
 
@@ -696,12 +696,12 @@
 
 .timeline-station.current .station-content {
     border-color: rgba(0, 212, 255, 0.3);
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(177, 74, 237, 0.05));
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.08), rgba(0, 180, 216, 0.05));
 }
 
 .timeline-station.education .marker-core {
-    background: var(--accent-magenta);
-    box-shadow: var(--glow-magenta);
+    background: var(--accent-teal);
+    box-shadow: var(--glow-teal);
 }
 
 .station-content {
@@ -721,8 +721,8 @@
 }
 
 .station-date.education-badge {
-    color: var(--accent-magenta);
-    background: rgba(177, 74, 237, 0.15);
+    color: var(--accent-teal);
+    background: rgba(0, 180, 216, 0.15);
 }
 
 .station-title {
@@ -1124,6 +1124,10 @@
 
     .logo-img {
         height: 35px;
+    }
+
+    .floating-nav {
+        display: none;
     }
 
     .hero-name {

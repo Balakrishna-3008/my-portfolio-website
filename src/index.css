@@ -10,13 +10,13 @@
 
   /* Accent Colors */
   --accent-cyan: #00d4ff;
-  --accent-magenta: #b14aed;
-  --accent-violet: #7b2cbf;
+  --accent-teal: #00b4d8;
+  --accent-blue: #0077b6;
   --accent-gold: #ffd700;
 
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-magenta) 100%);
-  --gradient-aurora: linear-gradient(135deg, #00d4ff 0%, #7b2cbf 50%, #ff006e 100%);
+  /* Gradients - Cyan/Teal only (no purple) */
+  --gradient-primary: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-teal) 100%);
+  --gradient-aurora: linear-gradient(135deg, #00d4ff 0%, #0096c7 50%, #0077b6 100%);
   --gradient-glow: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
 
   /* Text */
@@ -28,7 +28,7 @@
   --glass-bg: rgba(18, 18, 31, 0.6);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glow-cyan: 0 0 30px rgba(0, 212, 255, 0.4);
-  --glow-magenta: 0 0 30px rgba(177, 74, 237, 0.4);
+  --glow-teal: 0 0 30px rgba(0, 180, 216, 0.4);
 
   /* Typography */
   --font-display: 'Space Grotesk', sans-serif;
@@ -48,7 +48,9 @@
 html,
 body {
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -68,16 +70,16 @@ body {
    App Container
    =============================== */
 .app {
-  height: 100%;
+  min-height: 100%;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* ===============================
    Scene Container & Transitions
    =============================== */
 .scene-container {
-  height: 100%;
+  min-height: 100%;
   position: relative;
 }
 
@@ -86,26 +88,17 @@ body {
 }
 
 .scene {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transform: scale(0.95);
-  transition: all 0.6s var(--ease-out-expo);
   padding: 2rem;
 }
 
 .scene.active {
-  opacity: 1;
-  visibility: visible;
-  transform: scale(1);
-  animation: sceneIn 0.8s var(--ease-out-expo) forwards;
+  display: flex;
 }
 
 @keyframes sceneIn {
@@ -213,7 +206,7 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(177, 74, 237, 0.1));
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 180, 216, 0.1));
   border-color: rgba(0, 212, 255, 0.2);
 }
 
@@ -301,11 +294,37 @@ body {
 @media (max-width: 768px) {
   .scene {
     padding: 1rem;
+    padding-top: 5rem;
+    min-height: auto;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .scene-content {
+    padding-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scene {
+    padding: 0.75rem;
     padding-top: 4rem;
   }
 
   .section-title {
-    font-size: 1.75rem;
-    margin-bottom: 2rem;
+    font-size: 1.25rem;
+  }
+
+  .glass-card {
+    padding: 1rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
   }
 }

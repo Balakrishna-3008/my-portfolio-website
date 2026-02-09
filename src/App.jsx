@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import ParticleCanvas from './components/ParticleCanvas'
 import FloatingNav from './components/FloatingNav'
 import FloatingLogo from './components/FloatingLogo'
@@ -15,94 +15,62 @@ import profilePhoto from './assets/profile-photo.jpg'
 import hbLogo from './assets/hb-logo.png'
 
 function App() {
-    const [activeSection, setActiveSection] = useState('hero')
-    const [isTransitioning, setIsTransitioning] = useState(false)
     const containerRef = useRef(null)
 
     const sections = ['hero', 'about', 'skills', 'journey', 'projects', 'connect']
 
     const navigateToSection = (sectionId) => {
-        if (isTransitioning || sectionId === activeSection) return
-
-        setIsTransitioning(true)
-
-        // Smooth transition
-        setTimeout(() => {
-            setActiveSection(sectionId)
-            setTimeout(() => {
-                setIsTransitioning(false)
-            }, 600)
-        }, 300)
+        const element = document.getElementById(sectionId)
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' })
+        }
     }
 
-    // Keyboard navigation
+    // Update active section based on scroll
     useEffect(() => {
-        const handleKeyDown = (e) => {
-            const currentIndex = sections.indexOf(activeSection)
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY + window.innerHeight / 3
 
-            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-                if (currentIndex < sections.length - 1) {
-                    navigateToSection(sections[currentIndex + 1])
-                }
-            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-                if (currentIndex > 0) {
-                    navigateToSection(sections[currentIndex - 1])
+            for (const section of sections) {
+                const element = document.getElementById(section)
+                if (element) {
+                    const { offsetTop, offsetHeight } = element
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                        // Update nav indicator if needed
+                        break
+                    }
                 }
             }
         }
 
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [activeSection, isTransitioning])
-
-    // Wheel navigation with debounce
-    useEffect(() => {
-        let wheelTimeout = null
-
-        const handleWheel = (e) => {
-            if (wheelTimeout) return
-
-            wheelTimeout = setTimeout(() => {
-                wheelTimeout = null
-            }, 1000)
-
-            const currentIndex = sections.indexOf(activeSection)
-
-            if (e.deltaY > 0 && currentIndex < sections.length - 1) {
-                navigateToSection(sections[currentIndex + 1])
-            } else if (e.deltaY < 0 && currentIndex > 0) {
-                navigateToSection(sections[currentIndex - 1])
-            }
-        }
-
-        window.addEventListener('wheel', handleWheel, { passive: true })
-        return () => window.removeEventListener('wheel', handleWheel)
-    }, [activeSection, isTransitioning])
+        window.addEventListener('scroll', handleScroll, { passive: true })
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
     return (
         <div className="app" ref={containerRef}>
             <ParticleCanvas />
             <FloatingLogo logo={hbLogo} />
             <FloatingNav
-                activeSection={activeSection}
+                activeSection={'hero'}
                 onNavigate={navigateToSection}
                 sections={sections}
             />
 
-            <main className={`scene-container ${isTransitioning ? 'transitioning' : ''}`}>
+            <main className="scene-container">
                 <HeroScene
-                    isActive={activeSection === 'hero'}
+                    isActive={true}
                     profilePhoto={profilePhoto}
                     onNavigate={navigateToSection}
                 />
                 <AboutScene
-                    isActive={activeSection === 'about'}
+                    isActive={true}
                     profilePhoto={profilePhoto}
                 />
-                <SkillsScene isActive={activeSection === 'skills'} />
-                <JourneyScene isActive={activeSection === 'journey'} />
-                <ProjectsScene isActive={activeSection === 'projects'} />
-                <ConnectScene isActive={activeSection === 'connect'} />
+                <SkillsScene isActive={true} />
+                <JourneyScene isActive={true} />
+                <ProjectsScene isActive={true} />
+                <ConnectScene isActive={true} />
             </main>
         </div>
     )
