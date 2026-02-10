@@ -59,6 +59,8 @@
     padding: 0.5rem;
     border-radius: 50px;
     transition: all 0.4s var(--ease-out-expo);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .orb-icon {
@@ -968,6 +970,7 @@
     background: radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.15), transparent 70%);
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .contact-orb:hover .orb-glow {
