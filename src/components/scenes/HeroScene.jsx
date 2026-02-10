@@ -25,19 +25,27 @@ function HeroScene({ isActive, profilePhoto, onNavigate }) {
                         Securing digital ecosystems through SOC operations, phishing investigations, and intelligent automation.
                     </p>
                     <div className="hero-actions">
-                        <button
+                        <a
                             className="btn-primary magnetic"
-                            onClick={() => onNavigate('connect')}
+                            href="#connect"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                onNavigate('connect')
+                            }}
                         >
                             <span>Let's Connect</span>
                             <div className="btn-glow"></div>
-                        </button>
-                        <button
+                        </a>
+                        <a
                             className="btn-secondary magnetic"
-                            onClick={() => onNavigate('projects')}
+                            href="#projects"
+                            onClick={(e) => {
+                                e.preventDefault()
+                                onNavigate('projects')
+                            }}
                         >
                             <span>View Work</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
